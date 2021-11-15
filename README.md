@@ -1,10 +1,13 @@
-Some Termux dot files on my phone:
+Some Termux dot files on my phone.
 
 They are:
 
-- .bashrc : not much
-- termux.properties : especially configured extra keys for `neovim`
-- .zshrc : many personal stuff, many shortcuts or alias
-- .init.vim : python and javascript IDE. Mostly copy and paste snippets fromna few Internet guides.
+- `.zshrc` : many personal stuff, many shortcuts or alias
+- `.bashrc` : not much configured since I use `zsh`
+- `termux.properties` : especially configured extra keys for `neovim`
 
-They may not work well for you, consider not blindly copy and paste.
+- `.init.vim` : mainly configured for **Python** and **JavaScript** "IDE". Mostly copy and paste snippets from a few Internet guides.
+
+They may not work for you, consider not blindly copy and paste.
+
+![](termux-neovim.jpg)
