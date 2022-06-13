@@ -1,4 +1,69 @@
+" Last modified 13 June 2022 
+" For neovim on Termux ~/.config/nvim/init.vim
+
+" Show line number
+set number
+" Show relative line number
+set relativenumber
+set autoindent
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+inoremap jk <ESC> " type jk instead of ESC
+
+syntax on
+" You can use ZZ instead of :wq
 call plug#begin(stdpath('data') . '/plugged')
+
+" Plug 'lervag/vimtex' " Does not work on Termux
+
+Plug 'https://github.com/preservim/nerdtree' "NerdTree
+Plug 'https://github.com/tpope/vim-commentary' "For Commenting gcc & gc
+
+" From ------ https://github.com/hrsh7th/nvim-cmp
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" End ------ https://github.com/hrsh7th/nvim-cmp
+
+
+
+
+
+
+" Grammar checkers
+" Plug 'brymer-meneses/grammar-guard.nvim'
+" Plug 'williamboman/nvim-lsp-installer'
+
+
+
+
+
+" DART
+" ----- https://x-team.com/blog/neovim-flutter/
+"Plug 'thosakwe/vim-flutter'
+"Plug 'dart-lang/dart-vim-plugin'
+"Plug 'natebosch/vim-lsc'
+"Plug 'natebosch/vim-lsc-dart'
+" ----- https://x-team.com/blog/neovim-flutter/
+
+
+" ----- Flutter not work on Termux yet
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'akinsho/flutter-tools.nvim'
+
+
+
+" Intro screen
+" Plug 'mhinz/vim-startify'
+
+
+" Python pep8
+Plug 'tell-k/vim-autopep8'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Treesitter-based highlighting
 
@@ -13,26 +78,24 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', '
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 
 " these two plugins will add highlighting and indenting to JSX and TSX files.
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'yuezk/vim-js'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'maxmellon/vim-jsx-pretty'
 
 " End ------ https://x-team.com/blog/neovim-javascript/amp/
 
 
-" From ------ https://github.com/hrsh7th/nvim-cmp
-
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
-" End ------ https://github.com/hrsh7th/nvim-cmp
-
 call plug#end()
+
+" startify screen
+" let g:startify_custom_header = 'startify#pad(startify#fortune#quote())'
+
+
+" Auto format on save python file
+let g:autopep8_on_save = 1
+let g:autopep8_disable_show_diff = 1
+
+
 
 
 " Cursor modes
@@ -286,9 +349,23 @@ lua <<EOF
     capabilities = capabilities
   }
   
+  -- HTML 
   require('lspconfig')['html'].setup {
     capabilities = capabilities
   }
+  require('lspconfig')['cssls'].setup {
+    capabilities = capabilities
+  }
+  
+  -- bashls requires: npm i -g bash-language-server
+  require('lspconfig')['bashls'].setup {
+    capabilities = capabilities
+  }
+
+  
+  -- require("flutter-tools").setup{} -- use defaults
+  -- require('lspconfig')['bashls'].setup{}
   
   
-EOF
+  
+
