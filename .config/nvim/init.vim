@@ -1,23 +1,66 @@
-" Last modified 13 June 2022 
-" For neovim on Termux ~/.config/nvim/init.vim
-
 " Show line number
 set number
+
 " Show relative line number
 set relativenumber
 set autoindent
 set shiftwidth=2
-set tabstop=2
 set softtabstop=2
+set tabstop=2
+syntax on
+
+" Spelling
+" set spell spelllang=en_gb
 
 inoremap jk <ESC> " type jk instead of ESC
 
-syntax on
-" You can use ZZ instead of :wq
+" ------------ NerdTree ------------
+" Toggle on/off NERDTree
+" nnoremap <C-n> :NERDTreeToggle<CR>
+
+map <silent> <C-n> :NERDTreeToggle<CR>
+
+" Start NERDTree when Vim is started without file arguments.
+" This snippet is from https://github.com/preservim/nerdtree
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" ------------ NerdTree ------------
+
+" " English word popup suggestion
+" " -------- modified https://stackoverflow.com/a/41432390
+" set dictionary+=~/.config/dictionary/british-english-large
+
+" set completeopt+=noinsert
+" set cmdheight=2
+" " call SuperTabSetDefaultCompletionType("<c-x><c-n>")
+" " NeoCompleteDisable
+
+" augroup Main
+" autocmd!
+" autocmd InsertCharPre * call <SID>PopUpDict()
+" augroup END
+
+" let s:count=0
+" function! s:PopUpDict()
+"     let AsciiCode=char2nr(v:char)
+"     if (AsciiCode <=# 122 && AsciiCode >=# 97) || (AsciiCode <=# 90 && AsciiCode >=# 65)  
+"         let s:count+=1
+"         if s:count >=# 3
+"         call feedkeys("\<c-x>\<c-k>")   
+"         endif
+"     else
+"         let s:count=0
+"     endif
+" endfunction
+" " -------- https://stackoverflow.com/a/41432390
+
+
 call plug#begin(stdpath('data') . '/plugged')
 
 " Plug 'lervag/vimtex' " Does not work on Termux
 
+Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/preservim/nerdtree' "NerdTree
 Plug 'https://github.com/tpope/vim-commentary' "For Commenting gcc & gc
 
@@ -31,16 +74,9 @@ Plug 'hrsh7th/nvim-cmp'
 " End ------ https://github.com/hrsh7th/nvim-cmp
 
 
-
-
-
-
 " Grammar checkers
 " Plug 'brymer-meneses/grammar-guard.nvim'
 " Plug 'williamboman/nvim-lsp-installer'
-
-
-
 
 
 " DART
@@ -52,7 +88,7 @@ Plug 'hrsh7th/nvim-cmp'
 " ----- https://x-team.com/blog/neovim-flutter/
 
 
-" ----- Flutter not work on Termux yet
+" ----- Flutter
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'akinsho/flutter-tools.nvim'
 
@@ -90,13 +126,9 @@ call plug#end()
 " startify screen
 " let g:startify_custom_header = 'startify#pad(startify#fortune#quote())'
 
-
 " Auto format on save python file
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff = 1
-
-
-
 
 " Cursor modes
 let &t_SI = "\<esc>[5 q" " I beam cursor for insert mode
@@ -105,8 +137,6 @@ let &t_EI = "\<esc>[4 q" " underline cursor for normal mode
 
 " Add Prettier format command
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-
 
 
 " From ---- https://github.com/neoclide/coc.nvim
@@ -369,3 +399,11 @@ lua <<EOF
   
   
 
+
+
+
+
+
+
+
+EOF
