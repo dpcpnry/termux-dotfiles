@@ -111,39 +111,43 @@ alias wget='wget -c'
 alias e='exit'
 alias py='python3'
 
-alias ss='echo "Starting Apache PHP server\nUse ee to stop"; apachectl start; termux-open http://127.0.0.1:8927/'
 alias sdh='echo "Starting Apache PHP server - Dhammafts\nUse ee to stop"; apachectl start; termux-open http://127.0.0.1:8927/dhammafts-full/'
+
 alias ssc='echo "Starting Apache PHP server - Codefts\nUse ee to stop"; apachectl start; termux-open http://127.0.0.1:8927/devDocFTS/'
+
+alias scc='echo "Starting Apache PHP server - Corpusfts\nUse ee to stop"; apachectl start; termux-open http://127.0.0.1:8927/corpus_fts/'
+
 alias ee='echo "Stopping Apache PHP server"; apachectl stop; echo "Done";'
-alias lc='termux-open http://127.0.0.1:8080 && http-server  ~/storage/shared/localhost'
-alias lcp='termux-open http://127.0.0.1:8080 && http-server  ~/storage/shared/localhost/_sharePublish'
+#	alias lc='termux-open http://127.0.0.1:8080 && http-server  ~/storage/shared/localhost'
+# alias lcp='termux-open http://127.0.0.1:8080 && http-server  ~/storage/shared/localhost/_sharePublish'
 
 alias lm='npm list -g --depth=0'
 alias gdd='cd ~/storage/shared/download/'
 alias golm='cd /data/data/com.termux/files/usr/lib/node_modules'
-alias ipa='python3 ~/to_ipa.py'
+
+
 alias ppp='cd ~/storage/shared/TEST'
 alias transfer='sh ~/.transfer.sh'
 alias java='~/.java.sh'
 alias wwwh='cd ~/.. ;npx webdav-cli --username p --password p --directory true --autoIndex true;'
 alias wwww='npx webdav-cli --username p --password p --directory true --autoIndex true;'
 
-alias ddd='cd ~/webui-aria2; python3 runserver.py'
-
 alias jjj='cd ~/storage/shared/myJupyterNoteBook/ && termux-open http://localhost:8888/ && jupyter-notebook'
 alias iii='ipython'
 alias vv='nvim'
 
-#alias uu='cd ~/ubuntu-in-termux && ./startubuntu.sh && vncserver-start'
-# alias uu='cd ~/ubuntu-in-termux && ./startubuntu.sh'
-alias uuu='cd ~/ubuntu-in-termux ; ./startubuntu.sh'
+alias uuu='cd ~/ ; ./startubuntu.sh'
 
 alias www='cd ~/; cd .. ;wsgidav --host=0.0.0.0 --port=9999 --root=./ --auth=anonymous'
-
+alias sss='http-server -p 8765 -o'
 # Mozilla Deep Speech library
 
 
-alias s2t='export LD_LIBRARY_PATH=~/s2t/ && ~/s2t/deepspeech --model ~/s2t/deepspeech-0.9.3-models.tflite --scorer ~/s2t/deepspeech-0.9.3-models.scorer --audio '
+# alias s2t='export LD_LIBRARY_PATH=~/s2t/ && ~/s2t/deepspeech --model ~/s2t/deepspeech-0.9.3-models.tflite --scorer ~/s2t/deepspeech-0.9.3-models.scorer --audio '
+
+# alias cloudflare2='/data/data/com.termux/files/home/.pncloudflared/cloudflared-linux-arm64'
+
+#	alias ngrok='/data/data/com.termux/files/home/.pnngrok/ngrok'
 
 # Fix npm global module not found
 export NODE_PATH=/data/data/com.termux/files/usr/lib/node_modules
@@ -157,32 +161,34 @@ echo "logcat -s 'sshd:*' will show sshd log"
 echo 'pkill sshd: stop ssh server'
 echo 'e: exit'
 echo 'py: python3'
-
 echo 'ss: apachectl start (php server:8927)'
-echo 'ssc: apachectl start (php server:8927) - Code fts'
-echo 'sdh: apachectl start (php server:8927) - Dhammafts'
-echo 'ee: apachectl stop'
-
-echo 'up: http-server upcalHTML'
-echo 'lcp: _sharePublish by http-server (nodejs)'
-echo 'lc: localhost by http-server (nodejs)'
+echo 'sdh/ssc/scc: apachectl start (php server:8927) - Dhamma/Code/Corpus fts'
+# echo 'ee: apachectl stop'
+echo 'sss: http-server :8765 and open URL'
+# echo 'lc: localhost by http-server (nodejs)'
 echo 'lm/golm: list/go to npm modules dirs'
 echo 'gdd: go to /storage/shared/download'
-echo 'java: java Hello.java (by ~/.java.sh)'
-echo 'ipa: Eng to ipa: ipa file.txt'
+# echo 'java: java Hello.java (by ~/.java.sh)'
 echo 'transfer: upload to transfer.sh'
-echo 'ppp: go to pnryCODE/TEST code'
+# echo 'ppp: go to pnryCODE/TEST code'
 echo 'wwww: webdavServer current dir'
 echo 'wwwh: webdavServer Termux root dir'
 echo 'giit: git add.;git commit -m'
-echo 'ddd: aria2c web ui'
 echo 'jjj: jupyter-notebook passw is: p'
 echo 'iii: ipython'
 echo 'www: webdavServer python-network'
-echo 'uuu: run ordinary ubuntu pandas...'
-echo 's2t file.wav: Mozilla deepspeech speech2text'
+echo 'uuu: run UBUNTU...'
+# echo 's2t file.wav: Mozilla deepspeech speech2text'
+# echo '(aria2c) download -o <new_name> <url>'
 echo 'vv: start nvim'
+# echo 'd: run dart'
+# echo 'pwrite: git push notes repo'
+# echo 'l: clear'
 echo '------------------------'
+
+function download() {
+    aria2c --continue=true --max-concurrent-downloads=10 --max-overall-download-limit=0 --check-certificate=false "$*"
+}
 
 function gitt() {
     git add .
@@ -190,6 +196,18 @@ function gitt() {
     git push
 }
 
+function pwrite() {
+    cd /storage/emulated/0/pWriting/
+    git add .
+    git commit -m "Termux backup"
+    git push
+}
+
+function d() {
+  dart format "$*"
+  dart --enable-asserts "$*"
+}
+
+
 # go to Test dir
 ppp
-
