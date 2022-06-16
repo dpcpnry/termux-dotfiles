@@ -11,7 +11,7 @@ export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="random"
 ZSH_THEME="fwalch"
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

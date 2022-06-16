@@ -7,6 +7,7 @@ set autoindent
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+set smarttab
 syntax on
 
 " Spelling
@@ -27,42 +28,19 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 " ------------ NerdTree ------------
 
-" " English word popup suggestion
-" " -------- modified https://stackoverflow.com/a/41432390
-" set dictionary+=~/.config/dictionary/british-english-large
-
-" set completeopt+=noinsert
-" set cmdheight=2
-" " call SuperTabSetDefaultCompletionType("<c-x><c-n>")
-" " NeoCompleteDisable
-
-" augroup Main
-" autocmd!
-" autocmd InsertCharPre * call <SID>PopUpDict()
-" augroup END
-
-" let s:count=0
-" function! s:PopUpDict()
-"     let AsciiCode=char2nr(v:char)
-"     if (AsciiCode <=# 122 && AsciiCode >=# 97) || (AsciiCode <=# 90 && AsciiCode >=# 65)  
-"         let s:count+=1
-"         if s:count >=# 3
-"         call feedkeys("\<c-x>\<c-k>")   
-"         endif
-"     else
-"         let s:count=0
-"     endif
-" endfunction
-" " -------- https://stackoverflow.com/a/41432390
-
-
 call plug#begin(stdpath('data') . '/plugged')
 
-" Plug 'lervag/vimtex' " Does not work on Termux
+" Plug 'terroo/vim-auto-markdown'
+
+" godlygeek/tabular must come before preservim/vim-markdown
+" Plug 'godlygeek/tabular' 
+" Plug 'preservim/vim-markdown'
 
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/preservim/nerdtree' "NerdTree
 Plug 'https://github.com/tpope/vim-commentary' "For Commenting gcc & gc
+
+" Plug 'lervag/vimtex' " Does not work on Termux
 
 " From ------ https://github.com/hrsh7th/nvim-cmp
 Plug 'neovim/nvim-lspconfig'
@@ -308,6 +286,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" pnry change bgclor Termux
+highlight CocFloating ctermbg=8
+
 " End ---- https://github.com/neoclide/coc.nvim
 
 
@@ -407,3 +388,32 @@ lua <<EOF
 
 
 EOF
+
+" " English word popup suggestion
+" " -------- modified https://stackoverflow.com/a/41432390
+" set dictionary+=~/.config/dictionary/british-english-large
+
+" set completeopt+=noinsert
+" set cmdheight=2
+" " call SuperTabSetDefaultCompletionType("<c-x><c-n>")
+" " NeoCompleteDisable
+
+" augroup Main
+" autocmd!
+" autocmd InsertCharPre * call <SID>PopUpDict()
+" augroup END
+
+" let s:count=0
+" function! s:PopUpDict()
+"     let AsciiCode=char2nr(v:char)
+"     if (AsciiCode <=# 122 && AsciiCode >=# 97) || (AsciiCode <=# 90 && AsciiCode >=# 65)  
+"         let s:count+=1
+"         if s:count >=# 3
+"         call feedkeys("\<c-x>\<c-k>")   
+"         endif
+"     else
+"         let s:count=0
+"     endif
+" endfunction
+" " -------- https://stackoverflow.com/a/41432390
+
